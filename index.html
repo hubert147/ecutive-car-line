@@ -365,6 +365,7 @@
     .service-body p { min-height: auto; }
     .service-image { height: 240px; }
     .services { padding: 80px 0; }
+    .specialty { padding: 80px 0; }
     .why { padding: 80px 0; }
     .gallery { padding: 80px 0; }
     .booking { padding: 80px 0; }
@@ -372,6 +373,78 @@
     .contact { padding: 80px 0; }
     .stats { padding: 70px 0; }
     .section-head { margin-bottom: 50px; }
+  }
+
+  /* ─── SPECIALTY EXPERIENCES ─────── */
+  .specialty {
+    padding: 140px 0;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .specialty-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+  }
+  .specialty-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    transition: all 0.5s;
+    min-height: 480px;
+    display: flex; flex-direction: column;
+  }
+  .specialty-card:hover { border-color: var(--gold); transform: translateY(-6px); }
+  .specialty-image {
+    height: 320px;
+    background-size: cover; background-position: center;
+    position: relative;
+    transition: transform 0.7s;
+  }
+  .specialty-card:hover .specialty-image { transform: scale(1.06); }
+  .specialty-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,10,12,0.6) 100%);
+  }
+  .specialty-body {
+    padding: 40px 36px 44px;
+    flex: 1;
+    display: flex; flex-direction: column;
+  }
+  .specialty-tag {
+    display: inline-block;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+  }
+  .specialty-body h3 {
+    font-size: 36px; margin-bottom: 18px;
+    line-height: 1.1;
+  }
+  .specialty-body h3 em { font-style: italic; color: var(--gold-bright); }
+  .specialty-body p {
+    color: var(--text-mute);
+    font-size: 16px;
+    margin-bottom: 28px;
+    line-height: 1.7;
+    flex: 1;
+  }
+  .specialty-features {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    padding-top: 22px; border-top: 1px solid var(--line);
+  }
+  .specialty-features span {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-mute);
+    padding: 6px 12px; border: 1px solid var(--line);
+    border-radius: 99px;
+  }
+  @media (max-width: 800px) {
+    .specialty-grid { grid-template-columns: 1fr; gap: 24px; }
+    .specialty-card { min-height: auto; }
+    .specialty-image { height: 240px; }
+    .specialty-body { padding: 32px 28px 36px; }
+    .specialty-body h3 { font-size: 30px; }
   }
 
   /* ─── WHY US ───────────────────────── */
@@ -748,6 +821,50 @@
           <div class="service-price">
             <span class="from">From</span>
             <span class="amt">£495<sup style="font-size:0.45em;color:var(--gold)">/day</sup></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SPECIALTY EXPERIENCES ───────── -->
+<section class="specialty" id="specialty">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Signature Experiences</span>
+      <h2>For your most <em>memorable</em> moments.</h2>
+      <p>Beyond transfers and tours — bespoke chauffeur experiences crafted for the occasions that matter most.</p>
+    </div>
+    <div class="specialty-grid reveal-stagger">
+
+      <article class="specialty-card">
+        <div class="specialty-image" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/b5224978-3d97-44de-b41e-7f3f5a1b61d9/l0,t0,w2000,h1500/image-768x576.jpg')"></div>
+        <div class="specialty-body">
+          <span class="specialty-tag">⛳ — Greens & Fairways</span>
+          <h3>Golf <em>Outings</em></h3>
+          <p>Experience a perfect day on the greens with our dedicated transport. We chauffeur enthusiasts and clubs to St Andrews, Gleneagles, Muirfield and every legendary course in between — golf bags, etiquette and timing handled with care.</p>
+          <div class="specialty-features">
+            <span>St Andrews</span>
+            <span>Gleneagles</span>
+            <span>Muirfield</span>
+            <span>Carnoustie</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="specialty-card">
+        <div class="specialty-image" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/89544277-fbab-4e39-b4d9-470d2cbe5ec0/l95,t0,w1508,h1131/image-768x576.jpg')"></div>
+        <div class="specialty-body">
+          <span class="specialty-tag">♥ — Your Special Day</span>
+          <h3>Wedding <em>Services</em></h3>
+          <p>Make your special day even more memorable with our luxurious wedding car services. Pristine vehicles, ribbons and floral arrangements, a discreet chauffeur — every detail polished so your only focus is the moment.</p>
+          <div class="specialty-features">
+            <span>Bridal car</span>
+            <span>Multi-vehicle convoy</span>
+            <span>Floral styling</span>
+            <span>Photography stops</span>
           </div>
         </div>
       </article>
