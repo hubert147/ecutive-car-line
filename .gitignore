@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Vercel
+.vercel/
+
+# Node (if you ever add tooling)
+node_modules/
+npm-debug.log
+yarn-error.log

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Executive Car Line — Luxury Tours & Transfers in Scotland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-soft: #111114;
+    --bg-elev: #16161a;
+    --gold: #c9a96e;
+    --gold-bright: #e6c98c;
+    --gold-deep: #8c7340;
+    --text: #f4f1ea;
+    --text-mute: #a8a39a;
+    --line: rgba(201, 169, 110, 0.18);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; letter-spacing: 0.5px; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+  /* ─── NAV ─────────────────────────────── */
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 22px 0;
+    background: rgba(10, 10, 12, 0);
+    backdrop-filter: blur(0px);
+    transition: all 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+  nav.top.scrolled {
+    background: rgba(10, 10, 12, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; letter-spacing: 2px;
+  }
+  .logo .badge {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #0a0a0c; font-weight: 700;
+  }
+  .logo span { color: var(--gold-bright); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-mute); transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-bright); }
+  .nav-cta {
+    padding: 12px 26px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold-bright);
+    font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .nav-cta:hover { background: var(--gold); color: #0a0a0c; }
+  @media (max-width: 768px) { .nav-links { display: none; } }
+
+  /* ─── HERO ────────────────────────────── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/f15dcb35-f822-4de2-906f-e4bb655f42b1/l0,t340,w1620,h1620/image-768x768.jpg');
+    background-size: cover; background-position: center;
+    filter: brightness(0.45) saturate(1.1);
+    transform: scale(1.05);
+    transition: transform 4s ease;
+  }
+  .hero.loaded .hero-bg { transform: scale(1); }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, transparent 0%, rgba(10,10,12,0.7) 100%),
+      linear-gradient(180deg, rgba(10,10,12,0.4) 0%, rgba(10,10,12,0.8) 70%, var(--bg) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    width: 100%;
+    padding-top: 120px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 12px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 50px; height: 1px; background: var(--gold);
+  }
+  .hero h1 {
+    font-size: clamp(42px, 7vw, 92px);
+    line-height: 1.05;
+    font-weight: 300;
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+    max-width: 900px;
+    opacity: 0; animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-bright);
+    font-weight: 400;
+  }
+  .hero p.lead {
+    font-size: 19px;
+    color: var(--text-mute);
+    max-width: 580px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+    font-weight: 300;
+    opacity: 0; animation: fadeUp 1s 0.7s forwards;
+  }
+  .hero-cta-row {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 1s 0.9s forwards;
+  }
+  .btn-primary, .btn-ghost {
+    padding: 18px 38px;
+    font-size: 13px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.35s;
+    border: none;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-bright) 100%);
+    color: #0a0a0c;
+    box-shadow: 0 12px 40px rgba(201, 169, 110, 0.25);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 50px rgba(201, 169, 110, 0.45); }
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text);
+    backdrop-filter: blur(10px);
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold-bright); }
+
+  .hero-scroll {
+    position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%);
+    z-index: 3;
+    color: var(--text-mute);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp 1s 1.4s forwards;
+  }
+  .hero-scroll .line {
+    width: 1px; height: 50px; background: linear-gradient(180deg, var(--gold), transparent);
+    animation: scrollLine 2s infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── STATS ──────────────────────────── */
+  .stats {
+    padding: 100px 0;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+  }
+  .stat { text-align: center; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 8vw, 96px);
+    font-weight: 300;
+    color: var(--gold-bright);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .stat-number sup { font-size: 0.4em; color: var(--gold); }
+  .stat-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--text-mute);
+  }
+  @media (max-width: 700px) { .stats-grid { grid-template-columns: 1fr; gap: 50px; } }
+
+  /* ─── SECTION HEADER ────────────────── */
+  .section-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 80px;
+  }
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 22px;
+    padding: 6px 16px; border: 1px solid var(--line); border-radius: 99px;
+  }
+  .section-head h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.1;
+    margin-bottom: 22px;
+  }
+  .section-head h2 em { color: var(--gold-bright); font-style: italic; }
+  .section-head p {
+    color: var(--text-mute);
+    font-size: 17px;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* ─── SERVICES ──────────────────────── */
+  .services { padding: 140px 0; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .service-card {
+    position: relative;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+  .service-card:hover { transform: translateY(-8px); border-color: var(--gold); }
+  .service-image {
+    height: 280px;
+    background-size: cover; background-position: center;
+    position: relative;
+    transition: transform 0.7s;
+  }
+  .service-card:hover .service-image { transform: scale(1.06); }
+  .service-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,10,12,0.85) 100%);
+  }
+  .service-body {
+    padding: 36px 32px 40px;
+  }
+  .service-tag {
+    display: inline-block;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .service-body h3 {
+    font-size: 30px;
+    margin-bottom: 18px;
+  }
+  .service-body p {
+    color: var(--text-mute);
+    font-size: 15px;
+    margin-bottom: 28px;
+    min-height: 90px;
+  }
+  .service-price {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-top: 24px; border-top: 1px solid var(--line);
+  }
+  .service-price .from { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-mute); }
+  .service-price .amt {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; color: var(--gold-bright);
+  }
+  @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } .service-body p { min-height: auto; } }
+
+  /* ─── WHY US ───────────────────────── */
+  .why {
+    padding: 140px 0;
+    background: var(--bg-soft);
+    position: relative;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .feature {
+    padding: 40px 28px;
+    text-align: center;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.015);
+    transition: all 0.4s;
+  }
+  .feature:hover {
+    background: rgba(201, 169, 110, 0.04);
+    border-color: var(--gold);
+    transform: translateY(-6px);
+  }
+  .feature-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 24px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(201,169,110,0.02));
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    font-size: 26px;
+    color: var(--gold-bright);
+  }
+  .feature h3 { font-size: 22px; margin-bottom: 14px; }
+  .feature p { color: var(--text-mute); font-size: 14px; }
+  @media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .why-grid { grid-template-columns: 1fr; } }
+
+  /* ─── GALLERY ──────────────────────── */
+  .gallery { padding: 140px 0; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 280px 280px;
+    gap: 16px;
+  }
+  .gal {
+    background-size: cover; background-position: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  .gal::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(10,10,12,0.7));
+    opacity: 0.6;
+    transition: opacity 0.4s;
+  }
+  .gal:hover::after { opacity: 0.2; }
+  .gal:hover { transform: scale(1.02); }
+  .gal-1 { grid-column: span 2; grid-row: span 2; }
+  .gal-2 { grid-column: span 2; }
+  .gal-3, .gal-4, .gal-5 { grid-column: span 1; }
+  .gal-cap {
+    position: absolute; bottom: 24px; left: 28px; right: 28px;
+    z-index: 2;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+  }
+  @media (max-width: 800px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+    .gal-1, .gal-2 { grid-column: span 2; grid-row: span 1; }
+  }
+
+  /* ─── BOOKING ──────────────────────── */
+  .booking {
+    padding: 140px 0;
+    position: relative;
+    background:
+      linear-gradient(rgba(10,10,12,0.85), rgba(10,10,12,0.92)),
+      url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/785626f6-93f1-4c05-8587-abcb14e9e27b/l200,t0,w1800,h1350/image-768x576.jpg') center/cover fixed;
+  }
+  .booking-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: start;
+  }
+  .booking h2 { font-size: clamp(38px, 5vw, 60px); margin-bottom: 26px; }
+  .booking h2 em { color: var(--gold-bright); font-style: italic; }
+  .booking-lead {
+    color: var(--text-mute); font-size: 17px; margin-bottom: 36px;
+    line-height: 1.7;
+  }
+  .booking-feat {
+    display: flex; flex-direction: column; gap: 18px;
+    margin-top: 32px;
+  }
+  .booking-feat li {
+    display: flex; align-items: center; gap: 14px;
+    color: var(--text-mute);
+    font-size: 15px;
+    list-style: none;
+  }
+  .booking-feat li::before {
+    content: '✦'; color: var(--gold); font-size: 14px;
+  }
+  .booking-form {
+    background: rgba(22, 22, 26, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--line);
+    padding: 48px;
+  }
+  .booking-form h3 {
+    font-size: 28px; margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+  .form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .form-field label {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .form-field input, .form-field select, .form-field textarea {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--line);
+    color: var(--text);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border 0.3s;
+    outline: none;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-field select option { background: var(--bg-elev); }
+  .booking-form .btn-primary { width: 100%; justify-content: center; margin-top: 12px; }
+  .quote-display {
+    margin-top: 24px;
+    padding: 20px 24px;
+    background: rgba(201, 169, 110, 0.08);
+    border: 1px solid var(--gold);
+    color: var(--gold-bright);
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    display: none;
+  }
+  .quote-display.show { display: block; animation: fadeUp 0.5s forwards; }
+  @media (max-width: 900px) {
+    .booking-wrap { grid-template-columns: 1fr; gap: 50px; }
+    .form-row { grid-template-columns: 1fr; }
+    .booking-form { padding: 32px 24px; }
+  }
+
+  /* ─── TESTIMONIALS ─────────────────── */
+  .testimonials { padding: 140px 0; background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .testi {
+    padding: 44px 36px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    position: relative;
+    transition: all 0.4s;
+  }
+  .testi:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .testi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 96px;
+    line-height: 0.5;
+    color: var(--gold);
+    opacity: 0.3;
+    position: absolute; top: 30px; left: 30px;
+  }
+  .testi p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    line-height: 1.6;
+    font-style: italic;
+    color: var(--text);
+    margin: 32px 0 24px;
+    position: relative; z-index: 1;
+  }
+  .testi-stars { color: var(--gold); margin-bottom: 14px; letter-spacing: 4px; }
+  .testi-name {
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-mute);
+    padding-top: 18px; border-top: 1px solid var(--line);
+  }
+  @media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr; } }
+
+  /* ─── CONTACT ──────────────────────── */
+  .contact { padding: 140px 0; }
+  .contact-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center;
+  }
+  .contact-info h2 { font-size: clamp(38px, 5vw, 56px); margin-bottom: 28px; }
+  .contact-info h2 em { color: var(--gold-bright); font-style: italic; }
+  .contact-info > p { color: var(--text-mute); font-size: 17px; margin-bottom: 48px; }
+  .contact-list { display: flex; flex-direction: column; gap: 28px; }
+  .contact-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+  }
+  .contact-item:last-child { border-bottom: 1px solid var(--line); }
+  .contact-item .ico {
+    width: 52px; height: 52px;
+    flex-shrink: 0;
+    background: rgba(201,169,110,0.08);
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-bright);
+    font-size: 18px;
+  }
+  .contact-item .label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .contact-item .value { font-size: 16px; color: var(--text); }
+  .contact-image {
+    height: 600px;
+    background-size: cover; background-position: center;
+    position: relative;
+  }
+  .contact-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,12,0.2), rgba(10,10,12,0.6));
+  }
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+    .contact-image { height: 380px; }
+  }
+
+  /* ─── FOOTER ──────────────────────── */
+  footer {
+    background: var(--bg-soft);
+    padding: 60px 0 30px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  footer .logo { justify-content: center; margin-bottom: 24px; }
+  footer .copy { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-mute); }
+  footer .copy span { color: var(--gold); }
+
+  /* ─── REVEAL ANIMATIONS ──────────── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-stagger > * { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+  .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+  .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.2s; }
+  .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.35s; }
+  .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.5s; }
+  .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.65s; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────── -->
+<nav class="top" id="topNav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <span class="badge">E</span>
+      EXECUTIVE CAR <span>LINE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#gallery">Fleet</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#booking" class="nav-cta">Book Now</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ────────────────────────────── -->
+<section class="hero" id="heroSection">
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <div class="hero-eyebrow">Edinburgh · Glasgow · Highlands</div>
+    <h1>Discover Scotland<br/>in <em>uncompromising</em> style.</h1>
+    <p class="lead">Bespoke private tours, seamless airport transfers and chauffeur-driven journeys across Scotland — delivered with the discretion, comfort and expertise our guests expect.</p>
+    <div class="hero-cta-row">
+      <a href="#booking" class="btn-primary">Book Your Journey →</a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- ─── STATS ──────────────────────────── -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid reveal-stagger">
+      <div class="stat">
+        <div class="stat-number" data-target="976">0</div>
+        <div class="stat-label">Satisfied Clients</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="197">0</div>
+        <div class="stat-label">Successful Tours</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="1611">0</div>
+        <div class="stat-label">Transfers Completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ──────────────────────── -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Our Services</span>
+      <h2>Crafted journeys, <em>tailored</em> to you.</h2>
+      <p>From the moment we collect you until your final destination — every detail is handled with precision and care.</p>
+    </div>
+    <div class="services-grid reveal-stagger">
+
+      <article class="service-card">
+        <div class="service-image" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/b5224978-3d97-44de-b41e-7f3f5a1b61d9/l250,t0,w1500,h1500/image-768x768.jpg')"></div>
+        <div class="service-body">
+          <span class="service-tag">01 — Arrivals</span>
+          <h3>Airport Transfers</h3>
+          <p>Take the stress out of your arrival. Our uniformed driver meets you in the arrivals hall and delivers you in luxurious comfort to any destination across Scotland.</p>
+          <div class="service-price">
+            <span class="from">From</span>
+            <span class="amt">£75</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-image" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/89544277-fbab-4e39-b4d9-470d2cbe5ec0/l95,t0,w1508,h1131/image-768x576.jpg')"></div>
+        <div class="service-body">
+          <span class="service-tag">02 — On Demand</span>
+          <h3>Hourly Chauffeur</h3>
+          <p>Be chauffeured in comfort and style. Whether it's a special event or a half-day sightseeing tour, our hourly service makes every occasion exceptional.</p>
+          <div class="service-price">
+            <span class="from">From</span>
+            <span class="amt">£50<sup style="font-size:0.45em;color:var(--gold)">/hr</sup></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-image" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/ff458c03-caa0-48db-93a7-cdc2a9880923/l250,t0,w1500,h1500/image-768x768.jpg')"></div>
+        <div class="service-body">
+          <span class="service-tag">03 — Signature</span>
+          <h3>Multi-Day Tours</h3>
+          <p>Embark on a multi-day journey through Scotland with our knowledgeable driver-guide — from the Borders to a 10-day Highlands and Islands experience.</p>
+          <div class="service-price">
+            <span class="from">From</span>
+            <span class="amt">£495<sup style="font-size:0.45em;color:var(--gold)">/day</sup></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY US ────────────────────────── -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Why Choose Us</span>
+      <h2>The difference is in the <em>detail</em>.</h2>
+      <p>Discover what sets Executive Car Line apart in the luxury transport industry.</p>
+    </div>
+    <div class="why-grid reveal-stagger">
+      <div class="feature">
+        <div class="feature-icon">✦</div>
+        <h3>Personalised Tours</h3>
+        <p>Bespoke private journeys designed around your interests — heritage, landscapes, villages and coastline.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✈</div>
+        <h3>Reliable Transfers</h3>
+        <p>Punctual, trustworthy meet-and-greet airport service. From terminal to hotel, seamlessly.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⛳</div>
+        <h3>Golf Outings</h3>
+        <p>A perfect day on the greens with dedicated transport to St Andrews, Gleneagles and beyond.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">♥</div>
+        <h3>Wedding Service</h3>
+        <p>Make your special day even more memorable with our luxurious wedding car service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ───────────────────────── -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Scotland Through Our Lens</span>
+      <h2>Moments worth <em>remembering</em>.</h2>
+      <p>A glimpse of the experiences we create — from castles and coastlines to glens and golf courses.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gal gal-1" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/785626f6-93f1-4c05-8587-abcb14e9e27b/l200,t0,w1800,h1350/image-768x576.jpg')">
+        <div class="gal-cap">Highland landscapes</div>
+      </div>
+      <div class="gal gal-2" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/b5224978-3d97-44de-b41e-7f3f5a1b61d9/l0,t0,w2000,h1500/image-768x576.jpg')">
+        <div class="gal-cap">Edinburgh icons</div>
+      </div>
+      <div class="gal gal-3" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/ec7d4389-3485-4a92-8574-dfcfdcd6a3d1/l50,t0,w600,h450/image.webp')">
+        <div class="gal-cap">St Andrews</div>
+      </div>
+      <div class="gal gal-4" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/7127a516-d291-48d2-ac82-3e1b3013df94/l250,t0,w1500,h1500/image-768x768.jpg')">
+        <div class="gal-cap">Castles & culture</div>
+      </div>
+      <div class="gal gal-5" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/89544277-fbab-4e39-b4d9-470d2cbe5ec0/l95,t0,w1508,h1131/image-768x576.jpg')">
+        <div class="gal-cap">The Borders</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BOOKING ───────────────────────── -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="booking-wrap">
+      <div class="reveal">
+        <span class="section-eyebrow">Reserve Your Journey</span>
+        <h2 style="margin-top:22px">Begin your <em>Scottish</em><br/>experience.</h2>
+        <p class="booking-lead">Tell us what you have in mind — an arrival transfer, a half-day along the coast, or a week through the Highlands. We'll tailor every mile to your vision.</p>
+        <ul class="booking-feat">
+          <li>Free instant quote · no obligation</li>
+          <li>Premium fleet · meticulously maintained</li>
+          <li>Local driver-guides · authentic insight</li>
+          <li>Discreet, punctual, professional service</li>
+        </ul>
+      </div>
+
+      <form class="booking-form reveal" id="bookingForm" onsubmit="event.preventDefault(); estimateQuote();">
+        <h3>Request a Quote</h3>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@email.com" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Service</label>
+          <select id="serviceType" required>
+            <option value="">Select a service…</option>
+            <option value="airport">Airport Transfer (from £75)</option>
+            <option value="hourly">Hourly Chauffeur (from £50/hr)</option>
+            <option value="multiday">Multi-Day Tour (from £495/day)</option>
+            <option value="wedding">Wedding Service</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Pickup Location</label>
+            <input type="text" name="pickup" placeholder="Edinburgh Airport" required />
+          </div>
+          <div class="form-field">
+            <label>Destination</label>
+            <input type="text" name="dest" placeholder="St Andrews" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Date</label>
+            <input type="date" name="date" required />
+          </div>
+          <div class="form-field">
+            <label id="durLabel">Hours / Days</label>
+            <input type="number" id="duration" min="1" value="2" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Notes (optional)</label>
+          <textarea rows="3" placeholder="Number of guests, luggage, special requests…"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Get Instant Quote →</button>
+        <div class="quote-display" id="quoteDisplay"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ────────────────── -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Guest Stories</span>
+      <h2>What our <em>guests</em> say.</h2>
+      <p>We rely on great feedback. Here is a selection from recent journeys.</p>
+    </div>
+    <div class="testi-grid reveal-stagger">
+      <div class="testi">
+        <span class="testi-quote">"</span>
+        <div class="testi-stars">★★★★★</div>
+        <p>"We would like to thank you for a very enjoyable vacation. Your knowledge of Scotland and all the extra stops and tips were invaluable."</p>
+        <div class="testi-name">— Jeanne &amp; Michael</div>
+      </div>
+      <div class="testi">
+        <span class="testi-quote">"</span>
+        <div class="testi-stars">★★★★★</div>
+        <p>"Thank you for your expert guidance and ensuring a trip we will never forget. Every moment was perfectly orchestrated."</p>
+        <div class="testi-name">— Peter &amp; Pamela</div>
+      </div>
+      <div class="testi">
+        <span class="testi-quote">"</span>
+        <div class="testi-stars">★★★★★</div>
+        <p>"Thank you for showing us around Scotland and being a spectacular driver. We will definitely reach out if we go to Switzerland."</p>
+        <div class="testi-name">— Lisa &amp; Bob</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─────────────────────── -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="section-eyebrow">Get in Touch</span>
+        <h2 style="margin-top:22px">Let's plan your <em>journey</em>.</h2>
+        <p>Whether you have a specific itinerary in mind or want recommendations from a local — our team is ready to help.</p>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="ico">☎</div>
+            <div>
+              <div class="label">Telephone</div>
+              <div class="value">+44 7977 222607</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ico">✉</div>
+            <div>
+              <div class="label">E-mail</div>
+              <div class="value">info@executivecarline.co.uk</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ico">⌖</div>
+            <div>
+              <div class="label">Address</div>
+              <div class="value">Mountcastle Loan, Edinburgh, EH8 7RD<br/>Midlothian, United Kingdom</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-image reveal" style="background-image:url('https://www.executivecarline.co.uk/wp-content/uploads/go-x/u/f15dcb35-f822-4de2-906f-e4bb655f42b1/l0,t340,w1620,h1620/image-768x768.jpg')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ──────────────────────── -->
+<footer>
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="badge">E</span>
+      EXECUTIVE CAR <span>LINE</span>
+    </a>
+    <div class="copy">© 2026 Executive Car Line · <span>Edinburgh, Scotland</span> · Crafted for the discerning traveller</div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('topNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Hero loaded animation (slow zoom-in)
+  window.addEventListener('load', () => {
+    document.getElementById('heroSection').classList.add('loaded');
+  });
+
+  // On-scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // counter animation
+        if (e.target.classList.contains('reveal-stagger') && e.target.classList.contains('stats-grid')) {
+          e.target.querySelectorAll('.stat-number').forEach(el => {
+            const target = parseInt(el.dataset.target, 10);
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 60));
+            const tick = () => {
+              current = Math.min(target, current + step);
+              el.textContent = current.toLocaleString();
+              if (current < target) requestAnimationFrame(tick);
+            };
+            tick();
+          });
+        }
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+  // Booking form
+  const serviceSelect = document.getElementById('serviceType');
+  const durLabel = document.getElementById('durLabel');
+  const durInput = document.getElementById('duration');
+  serviceSelect.addEventListener('change', () => {
+    if (serviceSelect.value === 'multiday') { durLabel.textContent = 'Days'; durInput.value = 3; }
+    else if (serviceSelect.value === 'hourly') { durLabel.textContent = 'Hours (min 2)'; durInput.value = 2; durInput.min = 2; }
+    else if (serviceSelect.value === 'wedding') { durLabel.textContent = 'Hours'; durInput.value = 4; }
+    else { durLabel.textContent = 'Trips'; durInput.value = 1; }
+  });
+
+  function estimateQuote() {
+    const t = serviceSelect.value;
+    const d = parseInt(document.getElementById('duration').value, 10) || 1;
+    let total = 0, breakdown = '';
+    if (t === 'airport') { total = 75 * d; breakdown = `${d} transfer${d>1?'s':''} × £75`; }
+    else if (t === 'hourly') { total = 50 * Math.max(d,2); breakdown = `${Math.max(d,2)} hours × £50`; }
+    else if (t === 'multiday') { total = 495 * d; breakdown = `${d} days × £495`; }
+    else if (t === 'wedding') { total = 65 * d + 80; breakdown = `Wedding package · ${d} hours`; }
+    else { total = 0; breakdown = 'Please select a service'; }
+
+    const box = document.getElementById('quoteDisplay');
+    if (total > 0) {
+      box.innerHTML = `Your estimate · <strong style="font-size:1.2em">£${total.toLocaleString()}</strong><br/><span style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--text-mute)">${breakdown} · We'll confirm by email</span>`;
+    } else {
+      box.innerHTML = breakdown;
+    }
+    box.classList.add('show');
+  }
+</script>
+
+</body>
+</html>
